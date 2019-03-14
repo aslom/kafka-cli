@@ -1,0 +1,73 @@
+root@ak6:~/kafka_2.11-2.1.0# docker run -it kafka-cli  /opt/test.sh
++ export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/kafka/bin
++ PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/kafka/bin
++ exec /opt/test.sh
++ TOPIC=test
++ SERVER=9.59.193.46:9092
++ true
++ date
+Thu Mar 14 18:55:00 UTC 2019
++ echo 'Connecting to 9.59.193.46:9092 topic test'
+Connecting to 9.59.193.46:9092 topic test
++ /opt/kafka/bin/kafka-console-consumer.sh --bootstrap-server 9.59.193.46:9092 --topic test --from-beginning
+Test1
+Test3
+Test4
+Test5
+^CProcessed a total of 4 messages
+^[[Aroot@ak6:~/kafka_2.11-2.1.0# docker run -it kafka-cli  /opt/test.sh
++ export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/kafka/bin
++ PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/kafka/bin
++ exec /opt/test.sh
++ TOPIC=test
++ SERVER=9.59.193.46:9092
++ true
++ date
+Thu Mar 14 18:55:05 UTC 2019
++ echo 'Connecting to 9.59.193.46:9092 topic test'
+Connecting to 9.59.193.46:9092 topic test
++ /opt/kafka/bin/kafka-console-consumer.sh --bootstrap-server 9.59.193.46:9092 --topic test --from-beginning
+Test1
+Test3
+Test4
+Test5
+^CProcessed a total of 4 messages
+
+
+
+
+(base) macs-MacBook-Pro:kafka-cli aslom$ docker run -it kafka-cli  /opt/test.sh
++ export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/kafka/bin
++ PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/kafka/bin
++ exec /opt/test.sh
++ TOPIC=test
++ SERVER=9.59.193.46:9092
++ true
++ date
+Thu Mar 14 18:56:27 UTC 2019
++ echo 'Connecting to 9.59.193.46:9092 topic test'
+Connecting to 9.59.193.46:9092 topic test
++ /opt/kafka/bin/kafka-console-consumer.sh --bootstrap-server 9.59.193.46:9092 --topic test --from-beginning
+Test1
+Test3
+Test4
+Test5
+^CProcessed a total of 4 messages
+(base) macs-MacBook-Pro:kafka-cli aslom$
+(base) macs-MacBook-Pro:kafka-cli aslom$ docker run -it kafka-cli  /opt/test.sh
++ export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/kafka/bin
++ PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/kafka/bin
++ exec /opt/test.sh
++ TOPIC=test
++ SERVER=9.59.193.46:9092
++ true
++ date
+Thu Mar 14 18:56:34 UTC 2019
++ echo 'Connecting to 9.59.193.46:9092 topic test'
+Connecting to 9.59.193.46:9092 topic test
++ /opt/kafka/bin/kafka-console-consumer.sh --bootstrap-server 9.59.193.46:9092 --topic test --from-beginning
+Test1
+Test3
+Test4
+Test5
+^CProcessed a total of 4 messages
