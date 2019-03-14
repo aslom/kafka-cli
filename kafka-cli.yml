@@ -10,5 +10,5 @@ spec:
       - sleep
       - "3600"
     imagePullPolicy: IfNotPresent
-    name: busybox
+    name: kafka-cli
   restartPolicy: Always

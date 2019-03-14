@@ -1,0 +1,174 @@
+(base) macs-MacBook-Pro:kafka-cli aslom$ k delete pod kafka-cli -n knative-eventing
+pod "kafka-cli" deleted
+(base) macs-MacBook-Pro:kafka-cli aslom$ k apply -f kafka-cli-in-knative-eventing.yml
+pod/kafka-cli created
+(base) macs-MacBook-Pro:kafka-cli aslom$ kubectl exec -n knative-eventing -ti kafka-cli -- /opt/test.sh
++ TOPIC=test
++ SERVER=9.59.193.46:9092
++ true
++ date
+Thu Mar 14 18:14:35 UTC 2019
++ echo 'Connecting to 9.59.193.46:9092 topic test'
+Connecting to 9.59.193.46:9092 topic test
++ /opt/kafka/bin/kafka-console-consumer.sh --bootstrap-server 9.59.193.46:9092 --topic test --from-beginning
+Test1
+Test3
+Test4
+Test5
+^CProcessed a total of 4 messages
+command terminated with exit code 130
+(base) macs-MacBook-Pro:kafka-cli aslom$ kubectl exec -n knative-eventing -ti kafka-cli -- /opt/test.sh
++ TOPIC=test
++ SERVER=9.59.193.46:9092
++ true
++ date
+Thu Mar 14 18:16:03 UTC 2019
++ echo 'Connecting to 9.59.193.46:9092 topic test'
+Connecting to 9.59.193.46:9092 topic test
++ /opt/kafka/bin/kafka-console-consumer.sh --bootstrap-server 9.59.193.46:9092 --topic test --from-beginning
+[2019-03-14 18:16:10,295] ERROR Error processing message, terminating consumer process:  (kafka.tools.ConsoleConsumer$)
+java.lang.IllegalStateException: No entry found for connection 2147483647
+	at org.apache.kafka.clients.ClusterConnectionStates.nodeState(ClusterConnectionStates.java:330)
+	at org.apache.kafka.clients.ClusterConnectionStates.disconnected(ClusterConnectionStates.java:134)
+	at org.apache.kafka.clients.NetworkClient.initiateConnect(NetworkClient.java:885)
+	at org.apache.kafka.clients.NetworkClient.ready(NetworkClient.java:276)
+	at org.apache.kafka.clients.consumer.internals.ConsumerNetworkClient.tryConnect(ConsumerNetworkClient.java:548)
+	at org.apache.kafka.clients.consumer.internals.AbstractCoordinator$FindCoordinatorResponseHandler.onSuccess(AbstractCoordinator.java:655)
+	at org.apache.kafka.clients.consumer.internals.AbstractCoordinator$FindCoordinatorResponseHandler.onSuccess(AbstractCoordinator.java:635)
+	at org.apache.kafka.clients.consumer.internals.RequestFuture$1.onSuccess(RequestFuture.java:204)
+	at org.apache.kafka.clients.consumer.internals.RequestFuture.fireSuccess(RequestFuture.java:167)
+	at org.apache.kafka.clients.consumer.internals.RequestFuture.complete(RequestFuture.java:127)
+	at org.apache.kafka.clients.consumer.internals.ConsumerNetworkClient$RequestFutureCompletionHandler.fireCompletion(ConsumerNetworkClient.java:575)
+	at org.apache.kafka.clients.consumer.internals.ConsumerNetworkClient.firePendingCompletedRequests(ConsumerNetworkClient.java:389)
+	at org.apache.kafka.clients.consumer.internals.ConsumerNetworkClient.poll(ConsumerNetworkClient.java:297)
+	at org.apache.kafka.clients.consumer.internals.ConsumerNetworkClient.poll(ConsumerNetworkClient.java:236)
+	at org.apache.kafka.clients.consumer.internals.ConsumerNetworkClient.poll(ConsumerNetworkClient.java:215)
+	at org.apache.kafka.clients.consumer.internals.AbstractCoordinator.ensureCoordinatorReady(AbstractCoordinator.java:231)
+	at org.apache.kafka.clients.consumer.internals.ConsumerCoordinator.poll(ConsumerCoordinator.java:316)
+	at org.apache.kafka.clients.consumer.KafkaConsumer.updateAssignmentMetadataIfNeeded(KafkaConsumer.java:1214)
+	at org.apache.kafka.clients.consumer.KafkaConsumer.poll(KafkaConsumer.java:1179)
+	at org.apache.kafka.clients.consumer.KafkaConsumer.poll(KafkaConsumer.java:1164)
+	at kafka.tools.ConsoleConsumer$ConsumerWrapper.receive(ConsoleConsumer.scala:436)
+	at kafka.tools.ConsoleConsumer$.process(ConsoleConsumer.scala:104)
+	at kafka.tools.ConsoleConsumer$.run(ConsoleConsumer.scala:76)
+	at kafka.tools.ConsoleConsumer$.main(ConsoleConsumer.scala:54)
+	at kafka.tools.ConsoleConsumer.main(ConsoleConsumer.scala)
+Processed a total of 0 messages
++ sleep 1
++ true
++ date
+Thu Mar 14 18:16:11 UTC 2019
++ echo 'Connecting to 9.59.193.46:9092 topic test'
+Connecting to 9.59.193.46:9092 topic test
++ /opt/kafka/bin/kafka-console-consumer.sh --bootstrap-server 9.59.193.46:9092 --topic test --from-beginning
+[2019-03-14 18:16:13,013] ERROR Error processing message, terminating consumer process:  (kafka.tools.ConsoleConsumer$)
+java.lang.IllegalStateException: No entry found for connection 2147483647
+	at org.apache.kafka.clients.ClusterConnectionStates.nodeState(ClusterConnectionStates.java:330)
+	at org.apache.kafka.clients.ClusterConnectionStates.disconnected(ClusterConnectionStates.java:134)
+	at org.apache.kafka.clients.NetworkClient.initiateConnect(NetworkClient.java:885)
+	at org.apache.kafka.clients.NetworkClient.ready(NetworkClient.java:276)
+	at org.apache.kafka.clients.consumer.internals.ConsumerNetworkClient.tryConnect(ConsumerNetworkClient.java:548)
+	at org.apache.kafka.clients.consumer.internals.AbstractCoordinator$FindCoordinatorResponseHandler.onSuccess(AbstractCoordinator.java:655)
+	at org.apache.kafka.clients.consumer.internals.AbstractCoordinator$FindCoordinatorResponseHandler.onSuccess(AbstractCoordinator.java:635)
+	at org.apache.kafka.clients.consumer.internals.RequestFuture$1.onSuccess(RequestFuture.java:204)
+	at org.apache.kafka.clients.consumer.internals.RequestFuture.fireSuccess(RequestFuture.java:167)
+	at org.apache.kafka.clients.consumer.internals.RequestFuture.complete(RequestFuture.java:127)
+	at org.apache.kafka.clients.consumer.internals.ConsumerNetworkClient$RequestFutureCompletionHandler.fireCompletion(ConsumerNetworkClient.java:575)
+	at org.apache.kafka.clients.consumer.internals.ConsumerNetworkClient.firePendingCompletedRequests(ConsumerNetworkClient.java:389)
+	at org.apache.kafka.clients.consumer.internals.ConsumerNetworkClient.poll(ConsumerNetworkClient.java:297)
+	at org.apache.kafka.clients.consumer.internals.ConsumerNetworkClient.poll(ConsumerNetworkClient.java:236)
+	at org.apache.kafka.clients.consumer.internals.ConsumerNetworkClient.poll(ConsumerNetworkClient.java:215)
+	at org.apache.kafka.clients.consumer.internals.AbstractCoordinator.ensureCoordinatorReady(AbstractCoordinator.java:231)
+	at org.apache.kafka.clients.consumer.internals.ConsumerCoordinator.poll(ConsumerCoordinator.java:316)
+	at org.apache.kafka.clients.consumer.KafkaConsumer.updateAssignmentMetadataIfNeeded(KafkaConsumer.java:1214)
+	at org.apache.kafka.clients.consumer.KafkaConsumer.poll(KafkaConsumer.java:1179)
+	at org.apache.kafka.clients.consumer.KafkaConsumer.poll(KafkaConsumer.java:1164)
+	at kafka.tools.ConsoleConsumer$ConsumerWrapper.receive(ConsoleConsumer.scala:436)
+	at kafka.tools.ConsoleConsumer$.process(ConsoleConsumer.scala:104)
+	at kafka.tools.ConsoleConsumer$.run(ConsoleConsumer.scala:76)
+	at kafka.tools.ConsoleConsumer$.main(ConsoleConsumer.scala:54)
+	at kafka.tools.ConsoleConsumer.main(ConsoleConsumer.scala)
+Processed a total of 0 messages
++ sleep 1
++ true
++ date
+Thu Mar 14 18:16:14 UTC 2019
++ echo 'Connecting to 9.59.193.46:9092 topic test'
+Connecting to 9.59.193.46:9092 topic test
++ /opt/kafka/bin/kafka-console-consumer.sh --bootstrap-server 9.59.193.46:9092 --topic test --from-beginning
+[2019-03-14 18:16:15,912] ERROR Error processing message, terminating consumer process:  (kafka.tools.ConsoleConsumer$)
+java.lang.IllegalStateException: No entry found for connection 2147483647
+	at org.apache.kafka.clients.ClusterConnectionStates.nodeState(ClusterConnectionStates.java:330)
+	at org.apache.kafka.clients.ClusterConnectionStates.disconnected(ClusterConnectionStates.java:134)
+	at org.apache.kafka.clients.NetworkClient.initiateConnect(NetworkClient.java:885)
+	at org.apache.kafka.clients.NetworkClient.ready(NetworkClient.java:276)
+	at org.apache.kafka.clients.consumer.internals.ConsumerNetworkClient.tryConnect(ConsumerNetworkClient.java:548)
+	at org.apache.kafka.clients.consumer.internals.AbstractCoordinator$FindCoordinatorResponseHandler.onSuccess(AbstractCoordinator.java:655)
+	at org.apache.kafka.clients.consumer.internals.AbstractCoordinator$FindCoordinatorResponseHandler.onSuccess(AbstractCoordinator.java:635)
+	at org.apache.kafka.clients.consumer.internals.RequestFuture$1.onSuccess(RequestFuture.java:204)
+	at org.apache.kafka.clients.consumer.internals.RequestFuture.fireSuccess(RequestFuture.java:167)
+	at org.apache.kafka.clients.consumer.internals.RequestFuture.complete(RequestFuture.java:127)
+	at org.apache.kafka.clients.consumer.internals.ConsumerNetworkClient$RequestFutureCompletionHandler.fireCompletion(ConsumerNetworkClient.java:575)
+	at org.apache.kafka.clients.consumer.internals.ConsumerNetworkClient.firePendingCompletedRequests(ConsumerNetworkClient.java:389)
+	at org.apache.kafka.clients.consumer.internals.ConsumerNetworkClient.poll(ConsumerNetworkClient.java:297)
+	at org.apache.kafka.clients.consumer.internals.ConsumerNetworkClient.poll(ConsumerNetworkClient.java:236)
+	at org.apache.kafka.clients.consumer.internals.ConsumerNetworkClient.poll(ConsumerNetworkClient.java:215)
+	at org.apache.kafka.clients.consumer.internals.AbstractCoordinator.ensureCoordinatorReady(AbstractCoordinator.java:231)
+	at org.apache.kafka.clients.consumer.internals.ConsumerCoordinator.poll(ConsumerCoordinator.java:316)
+	at org.apache.kafka.clients.consumer.KafkaConsumer.updateAssignmentMetadataIfNeeded(KafkaConsumer.java:1214)
+	at org.apache.kafka.clients.consumer.KafkaConsumer.poll(KafkaConsumer.java:1179)
+	at org.apache.kafka.clients.consumer.KafkaConsumer.poll(KafkaConsumer.java:1164)
+	at kafka.tools.ConsoleConsumer$ConsumerWrapper.receive(ConsoleConsumer.scala:436)
+	at kafka.tools.ConsoleConsumer$.process(ConsoleConsumer.scala:104)
+	at kafka.tools.ConsoleConsumer$.run(ConsoleConsumer.scala:76)
+	at kafka.tools.ConsoleConsumer$.main(ConsoleConsumer.scala:54)
+	at kafka.tools.ConsoleConsumer.main(ConsoleConsumer.scala)
+Processed a total of 0 messages
++ sleep 1
++ true
++ date
+Thu Mar 14 18:16:17 UTC 2019
++ echo 'Connecting to 9.59.193.46:9092 topic test'
+Connecting to 9.59.193.46:9092 topic test
++ /opt/kafka/bin/kafka-console-consumer.sh --bootstrap-server 9.59.193.46:9092 --topic test --from-beginning
+[2019-03-14 18:16:18,822] ERROR Error processing message, terminating consumer process:  (kafka.tools.ConsoleConsumer$)
+java.lang.IllegalStateException: No entry found for connection 2147483647
+	at org.apache.kafka.clients.ClusterConnectionStates.nodeState(ClusterConnectionStates.java:330)
+	at org.apache.kafka.clients.ClusterConnectionStates.disconnected(ClusterConnectionStates.java:134)
+	at org.apache.kafka.clients.NetworkClient.initiateConnect(NetworkClient.java:885)
+	at org.apache.kafka.clients.NetworkClient.ready(NetworkClient.java:276)
+	at org.apache.kafka.clients.consumer.internals.ConsumerNetworkClient.tryConnect(ConsumerNetworkClient.java:548)
+	at org.apache.kafka.clients.consumer.internals.AbstractCoordinator$FindCoordinatorResponseHandler.onSuccess(AbstractCoordinator.java:655)
+	at org.apache.kafka.clients.consumer.internals.AbstractCoordinator$FindCoordinatorResponseHandler.onSuccess(AbstractCoordinator.java:635)
+	at org.apache.kafka.clients.consumer.internals.RequestFuture$1.onSuccess(RequestFuture.java:204)
+	at org.apache.kafka.clients.consumer.internals.RequestFuture.fireSuccess(RequestFuture.java:167)
+	at org.apache.kafka.clients.consumer.internals.RequestFuture.complete(RequestFuture.java:127)
+	at org.apache.kafka.clients.consumer.internals.ConsumerNetworkClient$RequestFutureCompletionHandler.fireCompletion(ConsumerNetworkClient.java:575)
+	at org.apache.kafka.clients.consumer.internals.ConsumerNetworkClient.firePendingCompletedRequests(ConsumerNetworkClient.java:389)
+	at org.apache.kafka.clients.consumer.internals.ConsumerNetworkClient.poll(ConsumerNetworkClient.java:297)
+	at org.apache.kafka.clients.consumer.internals.ConsumerNetworkClient.poll(ConsumerNetworkClient.java:236)
+	at org.apache.kafka.clients.consumer.internals.ConsumerNetworkClient.poll(ConsumerNetworkClient.java:215)
+	at org.apache.kafka.clients.consumer.internals.AbstractCoordinator.ensureCoordinatorReady(AbstractCoordinator.java:231)
+	at org.apache.kafka.clients.consumer.internals.ConsumerCoordinator.poll(ConsumerCoordinator.java:316)
+	at org.apache.kafka.clients.consumer.KafkaConsumer.updateAssignmentMetadataIfNeeded(KafkaConsumer.java:1214)
+	at org.apache.kafka.clients.consumer.KafkaConsumer.poll(KafkaConsumer.java:1179)
+	at org.apache.kafka.clients.consumer.KafkaConsumer.poll(KafkaConsumer.java:1164)
+	at kafka.tools.ConsoleConsumer$ConsumerWrapper.receive(ConsoleConsumer.scala:436)
+	at kafka.tools.ConsoleConsumer$.process(ConsoleConsumer.scala:104)
+	at kafka.tools.ConsoleConsumer$.run(ConsoleConsumer.scala:76)
+	at kafka.tools.ConsoleConsumer$.main(ConsoleConsumer.scala:54)
+	at kafka.tools.ConsoleConsumer.main(ConsoleConsumer.scala)
+Processed a total of 0 messages
++ sleep 1
++ true
++ date
+Thu Mar 14 18:16:20 UTC 2019
++ echo 'Connecting to 9.59.193.46:9092 topic test'
+Connecting to 9.59.193.46:9092 topic test
++ /opt/kafka/bin/kafka-console-consumer.sh --bootstrap-server 9.59.193.46:9092 --topic test --from-beginning
+Test1
+Test3
+Test4
+Test5
+^CProcessed a total of 4 messages
+command terminated with exit code 130

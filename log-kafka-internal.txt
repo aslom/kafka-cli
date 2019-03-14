@@ -1,0 +1,9 @@
+(base) macs-MacBook-Pro:knative-kafka aslom$ k logs kafka-channel-dispatcher-0 -n knative-eventing
+Error from server (BadRequest): a container name must be specified for pod kafka-channel-dispatcher-0, choose one of: [dispatcher istio-proxy] or one of the init containers: [istio-init]
+(base) macs-MacBook-Pro:knative-kafka aslom$ k logs kafka-channel-dispatcher-0 -n knative-eventing -c dispatcher
+{"level":"info","ts":1552585085.46637,"caller":"provisioners/message_receiver.go:73","msg":"Starting web server"}
+{"level":"info","ts":1552585085.5787315,"caller":"dispatcher/dispatcher.go:93","msg":"Updating config (-old +new)","diff":"{*multichannelfanout.Config}.ChannelConfigs:\n\t-: []multichannelfanout.ChannelConfig(nil)\n\t+: []multichannelfanout.ChannelConfig{{Namespace: \"default\", Name: \"test\"}}\n"}
+{"level":"info","ts":1552585196.30978,"caller":"dispatcher/dispatcher.go:93","msg":"Updating config (-old +new)","diff":"{*multichannelfanout.Config}.ChannelConfigs[?->1]:\n\t-: <non-existent>\n\t+: multichannelfanout.ChannelConfig{Namespace: \"default\", Name: \"my-kafka-channel\"}\n"}
+{"level":"info","ts":1552585196.640554,"caller":"dispatcher/dispatcher.go:93","msg":"Updating config (-old +new)","diff":"{*multichannelfanout.Config}.ChannelConfigs[0].Name:\n\t-: \"test\"\n\t+: \"my-kafka-channel\"\n{*multichannelfanout.Config}.ChannelConfigs[1].Name:\n\t-: \"my-kafka-channel\"\n\t+: \"test\"\n"}
+{"level":"info","ts":1552585198.3712413,"caller":"dispatcher/dispatcher.go:93","msg":"Updating config (-old +new)","diff":"{*multichannelfanout.Config}.ChannelConfigs[0].Name:\n\t-: \"my-kafka-channel\"\n\t+: \"test\"\n{*multichannelfanout.Config}.ChannelConfigs[1].Name:\n\t-: \"test\"\n\t+: \"my-kafka-channel\"\n"}
+ERROR: logging before flag.Parse: W0314 17:45:16.586689       1 reflector.go:341] github.com/knative/eventing/vendor/k8s.io/client-go/informers/factory.go:130: watch of *v1.ConfigMap ended with: too old resource version: 836762 (836878)
